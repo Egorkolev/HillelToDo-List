@@ -1,9 +1,9 @@
-import ContactsList from './components/pages/ContactsList';
+import ToDoList from './components/pages/ToDoList';
 
 function App() {
   return (
     <div className="App">
-      <ContactsList />
+      <ToDoList />
     </div>
   );
 }

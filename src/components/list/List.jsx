@@ -7,65 +7,47 @@ import "../../scss/main.scss";
 export default class List extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      tasks: "",
+    };
   }
-
   render() {
     return (
       <Box className="listContainer">
         <ul className="ulList">
-          <li
-            style={{ marginBottom: "10px", background: "lightBlue" }}
-            className="list"
-          >
-            <Box
-              sx={{
-                width: 200,
-              }}
-            >
-              <p>Name</p>
-            </Box>
-            <Box
-              sx={{
-                width: 200,
-              }}
-            >
-              <p>Username</p>
-            </Box>
-            <Box
-              sx={{
-                width: 200,
-                marginRight: 6,
-              }}
-            >
-              <p>phone</p>
-            </Box>
-          </li>
-          {this.props.list.map((user) => (
-            <li key={user.id} className="list">
+          {this.props.taskList?.doneTasks?.map((item) => (
+            <li key={item.id} className="doneList">
               <Box
+                onClick={() => this.props.handleTaskDone(item.id)}
                 sx={{
-                  width: 200,
+                  width: "100%",
+                  cursor: "pointer",
                 }}
               >
-                <p>{user.name}</p>
-              </Box>
-              <Box
-                sx={{
-                  width: 200,
-                }}
-              >
-                <p>{user.username}</p>
-              </Box>
-              <Box
-                sx={{
-                  width: 200,
-                }}
-              >
-                <p>{user.phone}</p>
+                <p>{item.task}</p>
               </Box>
               <IconButton
-                onClick={() => this.props.onDeleteUser(user.id)}
+                onClick={() => this.props.handleDeleteTask(item.id)}
+                edge="end"
+                aria-label="delete"
+              >
+                <DeleteIcon />
+              </IconButton>
+            </li>
+          ))}
+          {this.props.taskList?.tasks?.map((item) => (
+            <li key={item.id} className="list">
+              <Box
+                onClick={() => this.props.handleTaskDone(item.id)}
+                sx={{
+                  width: "100%",
+                  cursor: "pointer",
+                }}
+              >
+                <p>{item.task}</p>
+              </Box>
+              <IconButton
+                onClick={() => this.props.handleDeleteTask(item.id)}
                 edge="end"
                 aria-label="delete"
               >
